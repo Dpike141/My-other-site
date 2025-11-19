@@ -1,0 +1,1189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>SoFo Quantum – The Digital Mirror</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="SoFo Quantum – AI, Automation, Digital Transformation, and Custom App Systems for modern businesses." />
+
+  <style>
+    :root {
+      --bg: #020617;
+      --bg-alt: #020617ee;
+      --card: rgba(15, 23, 42, 0.9);
+      --accent: #38bdf8;
+      --accent-soft: rgba(56, 189, 248, 0.15);
+      --accent-2: #a855f7;
+      --text: #e5e7eb;
+      --muted: #9ca3af;
+      --danger: #f97373;
+      --border-subtle: rgba(148, 163, 184, 0.3);
+      --radius-lg: 18px;
+      --shadow-strong: 0 24px 80px rgba(15, 23, 42, 0.8);
+    }
+
+    * {
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+        "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #0b1120 0, #020617 55%, #000 100%);
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* Animated background */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: -50vh -50vw;
+      background:
+        radial-gradient(circle at 10% 20%, rgba(56, 189, 248, 0.15), transparent 55%),
+        radial-gradient(circle at 80% 0%, rgba(168, 85, 247, 0.16), transparent 55%),
+        radial-gradient(circle at 50% 100%, rgba(59, 130, 246, 0.12), transparent 55%);
+      filter: blur(8px);
+      opacity: 0.9;
+      z-index: -2;
+      animation: drift 35s linear infinite alternate;
+    }
+
+    @keyframes drift {
+      0% { transform: translate3d(0, 0, 0) scale(1); }
+      50% { transform: translate3d(-40px, 20px, 0) scale(1.05); }
+      100% { transform: translate3d(40px, -30px, 0) scale(1.02); }
+    }
+
+    .parallax-layer {
+      position: fixed;
+      inset: 0;
+      background:
+        linear-gradient(to bottom, rgba(15, 23, 42, 0.2), rgba(15, 23, 42, 0.9)),
+        repeating-linear-gradient(
+          -45deg,
+          rgba(15, 23, 42, 0.45),
+          rgba(15, 23, 42, 0.45) 1px,
+          transparent 1px,
+          transparent 4px
+        );
+      mix-blend-mode: soft-light;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    .wrapper {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 20px 20px 80px;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(22px);
+      background: linear-gradient(
+        to bottom,
+        rgba(2, 6, 23, 0.95),
+        rgba(2, 6, 23, 0.75),
+        transparent
+      );
+      border-bottom: 1px solid rgba(148, 163, 184, 0.2);
+    }
+
+    .nav-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 10px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .logo-mark {
+      width: 30px;
+      height: 30px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 30%, #e5e7eb, #38bdf8 45%, #0f172a 85%);
+      box-shadow: 0 0 20px rgba(56, 189, 248, 0.9);
+    }
+
+    .logo-text-main {
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+    }
+
+    .logo-text-sub {
+      font-size: 0.7rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.22em;
+    }
+
+    nav a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      padding: 4px 8px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      transition: all 0.18s ease-out;
+    }
+
+    nav a:hover {
+      color: var(--text);
+      border-color: rgba(148, 163, 184, 0.4);
+      background-color: rgba(15, 23, 42, 0.8);
+    }
+
+    .cta-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(56, 189, 248, 0.65);
+      color: var(--accent);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      text-decoration: none;
+      background: radial-gradient(circle at 0 0, rgba(56, 189, 248, 0.2), transparent);
+      box-shadow: 0 0 20px rgba(56, 189, 248, 0.25);
+      transition: all 0.18s ease-out;
+    }
+
+    .cta-pill:hover {
+      background-color: rgba(15, 23, 42, 0.9);
+      transform: translateY(-1px);
+    }
+
+    main {
+      margin-top: 16px;
+    }
+
+    section {
+      margin: 80px 0;
+    }
+
+    /* Hero */
+    #hero {
+      min-height: 76vh;
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1.1fr);
+      gap: 40px;
+      align-items: center;
+    }
+
+    @media (max-width: 880px) {
+      #hero {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .hero-kicker {
+      font-size: 0.8rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.22em;
+      margin-bottom: 10px;
+    }
+
+    .hero-title {
+      font-size: clamp(2.4rem, 3.4vw, 3.2rem);
+      line-height: 1.02;
+      margin: 0 0 16px;
+    }
+
+    .hero-title span {
+      background: linear-gradient(120deg, var(--accent), var(--accent-2));
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .hero-subtitle {
+      color: var(--muted);
+      font-size: 0.98rem;
+      max-width: 520px;
+    }
+
+    .hero-subtitle strong {
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    .hero-actions {
+      margin-top: 24px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .btn-primary {
+      border-radius: 999px;
+      padding: 10px 22px;
+      font-size: 0.9rem;
+      border: none;
+      cursor: pointer;
+      background: linear-gradient(120deg, var(--accent), var(--accent-2));
+      color: #0b1120;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 12px 40px rgba(15, 23, 42, 0.9);
+      text-decoration: none;
+      transition: transform 0.16s ease-out, box-shadow 0.16s ease-out;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 18px 50px rgba(15, 23, 42, 1);
+    }
+
+    .btn-ghost {
+      border-radius: 999px;
+      padding: 9px 18px;
+      font-size: 0.9rem;
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      background-color: rgba(15, 23, 42, 0.85);
+      color: var(--muted);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      transition: all 0.16s ease-out;
+    }
+
+    .btn-ghost:hover {
+      color: var(--text);
+      border-color: rgba(148, 163, 184, 1);
+      background-color: rgba(15, 23, 42, 0.95);
+    }
+
+    .hero-footnote {
+      margin-top: 18px;
+      font-size: 0.8rem;
+      color: var(--muted);
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .hero-footnote span {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .hero-footnote svg {
+      opacity: 0.8;
+    }
+
+    .hero-panel {
+      position: relative;
+      border-radius: 28px;
+      background: radial-gradient(circle at top left, rgba(56, 189, 248, 0.18), transparent 55%),
+                  radial-gradient(circle at bottom right, rgba(168, 85, 247, 0.16), transparent 60%),
+                  linear-gradient(145deg, #020617, #020617, #020617);
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      box-shadow: var(--shadow-strong);
+      padding: 18px 18px 18px;
+      overflow: hidden;
+    }
+
+    .hero-panel::before {
+      content: "QUANTUM MIRROR";
+      position: absolute;
+      top: 16px;
+      right: 20px;
+      font-size: 0.6rem;
+      letter-spacing: 0.28em;
+      color: rgba(148, 163, 184, 0.55);
+    }
+
+    .panel-inner {
+      border-radius: 20px;
+      padding: 18px;
+      background: radial-gradient(circle at top, rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.95));
+      border: 1px solid rgba(15, 23, 42, 0.9);
+    }
+
+    .panel-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 5px 11px;
+      border-radius: 999px;
+      font-size: 0.72rem;
+      color: var(--accent);
+      border: 1px solid rgba(56, 189, 248, 0.6);
+      background-color: rgba(15, 23, 42, 0.95);
+      margin-bottom: 8px;
+    }
+
+    .panel-mainline {
+      font-size: 1.1rem;
+      margin-bottom: 6px;
+    }
+
+    .panel-mainline span {
+      color: var(--accent);
+      font-weight: 500;
+    }
+
+    .panel-subline {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-bottom: 14px;
+    }
+
+    .panel-metrics {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .metric {
+      padding: 8px;
+      border-radius: 14px;
+      background-color: rgba(15, 23, 42, 0.95);
+      border: 1px solid rgba(30, 64, 175, 0.9);
+    }
+
+    .metric-label {
+      font-size: 0.7rem;
+      color: var(--muted);
+    }
+
+    .metric-value {
+      font-size: 0.96rem;
+      font-weight: 600;
+      margin-top: 2px;
+    }
+
+    .panel-footer {
+      margin-top: 6px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 3px 9px;
+      border-radius: 999px;
+      border: 1px solid rgba(56, 189, 248, 0.8);
+      background-color: rgba(15, 23, 42, 0.85);
+      color: var(--accent);
+      font-size: 0.7rem;
+    }
+
+    .status-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: radial-gradient(circle, #f9fafb, #22c55e);
+      box-shadow: 0 0 8px rgba(34, 197, 94, 0.9);
+    }
+
+    /* Sections */
+    .section-kicker {
+      text-transform: uppercase;
+      letter-spacing: 0.22em;
+      font-size: 0.75rem;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    .section-title {
+      font-size: 1.6rem;
+      margin-bottom: 8px;
+    }
+
+    .section-lead {
+      font-size: 0.95rem;
+      color: var(--muted);
+      max-width: 520px;
+    }
+
+    #services-grid {
+      margin-top: 24px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+    }
+
+    .service-card {
+      border-radius: var(--radius-lg);
+      padding: 15px 14px;
+      background-color: rgba(15, 23, 42, 0.94);
+      border: 1px solid rgba(51, 65, 85, 0.9);
+      box-shadow: 0 18px 60px rgba(15, 23, 42, 0.85);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .service-card::before {
+      content: "";
+      position: absolute;
+      inset: -40px;
+      background: radial-gradient(circle at 0 0, rgba(56, 189, 248, 0.18), transparent 65%);
+      opacity: 0;
+      transition: opacity 0.2s ease-out;
+    }
+
+    .service-card:hover::before {
+      opacity: 1;
+    }
+
+    .service-title {
+      font-size: 0.92rem;
+      margin-bottom: 4px;
+    }
+
+    .service-body {
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+
+    /* Packages */
+    #packages-grid {
+      margin-top: 26px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 18px;
+    }
+
+    .pkg-card {
+      border-radius: 22px;
+      padding: 18px 18px 16px;
+      background-color: rgba(15, 23, 42, 0.97);
+      border: 1px solid var(--border-subtle);
+      box-shadow: var(--shadow-strong);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .pkg-card.featured {
+      border-color: rgba(56, 189, 248, 0.9);
+      box-shadow: 0 24px 80px rgba(8, 47, 73, 0.9);
+    }
+
+    .pkg-tag {
+      position: absolute;
+      top: 12px;
+      right: 16px;
+      padding: 3px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(56, 189, 248, 0.8);
+      font-size: 0.7rem;
+      color: var(--accent);
+      background-color: rgba(15, 23, 42, 0.95);
+    }
+
+    .pkg-name {
+      font-size: 1rem;
+      margin-bottom: 4px;
+    }
+
+    .pkg-tier-label {
+      font-size: 0.76rem;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--muted);
+      margin-bottom: 10px;
+    }
+
+    .pkg-price {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .pkg-subprice {
+      font-size: 0.82rem;
+      color: var(--muted);
+      margin-bottom: 10px;
+    }
+
+    .pkg-desc {
+      font-size: 0.84rem;
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+
+    .pkg-features {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 12px;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    .pkg-features li {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 6px;
+    }
+
+    .pkg-features li::before {
+      content: "✦";
+      color: var(--accent);
+      margin-top: 1px;
+    }
+
+    .pkg-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 13px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.8);
+      font-size: 0.78rem;
+      color: var(--text);
+      text-decoration: none;
+      background-color: rgba(15, 23, 42, 0.9);
+      transition: all 0.15s ease-out;
+    }
+
+    .pkg-cta:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      background-color: rgba(15, 23, 42, 1);
+      transform: translateY(-1px);
+    }
+
+    /* Quantum section */
+    .quantum-shell {
+      margin-top: 26px;
+      border-radius: 22px;
+      padding: 18px 18px 18px;
+      background:
+        radial-gradient(circle at top left, rgba(56, 189, 248, 0.22), transparent 60%),
+        radial-gradient(circle at bottom right, rgba(168, 85, 247, 0.18), transparent 60%),
+        rgba(15, 23, 42, 0.97);
+      border: 1px solid rgba(56, 189, 248, 0.7);
+      box-shadow: 0 26px 90px rgba(15, 23, 42, 1);
+      display: grid;
+      grid-template-columns: minmax(0, 1.3fr) minmax(0, 1.1fr);
+      gap: 18px;
+    }
+
+    @media (max-width: 880px) {
+      .quantum-shell {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .quantum-tagline {
+      font-size: 0.92rem;
+      margin-bottom: 6px;
+    }
+
+    .quantum-list {
+      font-size: 0.84rem;
+      color: var(--muted);
+      margin: 10px 0 16px;
+      padding-left: 16px;
+    }
+
+    .quantum-list li {
+      margin-bottom: 4px;
+    }
+
+    .quantum-mini {
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+
+    .quantum-panel {
+      border-radius: 16px;
+      padding: 14px;
+      background-color: rgba(15, 23, 42, 0.97);
+      border: 1px solid rgba(30, 64, 175, 0.8);
+      font-size: 0.8rem;
+    }
+
+    .quantum-panel h4 {
+      margin: 0 0 6px;
+      font-size: 0.9rem;
+    }
+
+    .quantum-panel ol {
+      padding-left: 16px;
+      margin: 8px 0;
+    }
+
+    .quantum-panel li {
+      margin-bottom: 4px;
+    }
+
+    /* Form */
+    #qualify {
+      margin-top: 28px;
+    }
+
+    form {
+      margin-top: 18px;
+      border-radius: 22px;
+      padding: 18px 18px 20px;
+      background-color: rgba(15, 23, 42, 0.97);
+      border: 1px solid rgba(51, 65, 85, 0.9);
+      box-shadow: 0 24px 80px rgba(15, 23, 42, 0.95);
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 14px 16px;
+    }
+
+    .form-field {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      font-size: 0.8rem;
+    }
+
+    label {
+      color: var(--muted);
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="url"],
+    select,
+    textarea {
+      padding: 8px 10px;
+      border-radius: 10px;
+      border: 1px solid rgba(51, 65, 85, 0.9);
+      background-color: rgba(15, 23, 42, 0.95);
+      color: var(--text);
+      font-size: 0.82rem;
+      outline: none;
+      transition: border-color 0.15s ease-out, box-shadow 0.15s ease-out,
+        background-color 0.15s ease-out;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 1px rgba(56, 189, 248, 0.6);
+      background-color: rgba(15, 23, 42, 1);
+    }
+
+    textarea {
+      min-height: 90px;
+      resize: vertical;
+    }
+
+    .help-text {
+      font-size: 0.72rem;
+      color: var(--muted);
+    }
+
+    .checkbox-group,
+    .radio-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 16px;
+      font-size: 0.78rem;
+    }
+
+    .checkbox-group label,
+    .radio-group label {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      cursor: pointer;
+      color: var(--muted);
+    }
+
+    input[type="checkbox"],
+    input[type="radio"] {
+      width: 13px;
+      height: 13px;
+      accent-color: var(--accent);
+    }
+
+    .form-footer {
+      margin-top: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      font-size: 0.76rem;
+      color: var(--muted);
+    }
+
+    footer {
+      border-top: 1px solid rgba(30, 64, 175, 0.7);
+      margin-top: 64px;
+      padding-top: 18px;
+      font-size: 0.8rem;
+      color: var(--muted);
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+
+    footer a {
+      color: var(--accent);
+      text-decoration: none;
+      font-size: 0.8rem;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="parallax-layer"></div>
+
+  <header>
+    <div class="nav-inner">
+      <div class="logo">
+        <div class="logo-mark"></div>
+        <div>
+          <div class="logo-text-main">SOFO</div>
+          <div class="logo-text-sub">QUANTUM SYSTEMS</div>
+        </div>
+      </div>
+
+      <nav>
+        <a href="#services">Services</a>
+        <a href="#packages">Packages</a>
+        <a href="#quantum">SoFo Quantum</a>
+        <a href="#qualify">Apply</a>
+      </nav>
+
+      <a href="#qualify" class="cta-pill">
+        Start Intake
+        <span>↗</span>
+      </a>
+    </div>
+  </header>
+
+  <div class="wrapper">
+    <main>
+      <!-- HERO -->
+      <section id="hero">
+        <div>
+          <div class="hero-kicker">AI • AUTOMATION • DIGITAL TRANSFORMATION</div>
+          <h1 class="hero-title">
+            SoFo <span>Quantum</span> — The Digital Mirror for your business.
+          </h1>
+          <p class="hero-subtitle">
+            We design <strong>AI-driven workflows, automations, and custom apps</strong>
+            that help small teams operate like an elite engineering org — without hiring a full
+            internal ops squad.
+          </p>
+
+          <div class="hero-actions">
+            <a href="#qualify" class="btn-primary">
+              Qualify for a package
+              <span>→</span>
+            </a>
+
+            <a href="#packages" class="btn-ghost">
+              View tiers & pricing
+            </a>
+          </div>
+
+          <div class="hero-footnote">
+            <span>
+              <!-- lightning icon -->
+              ⚡
+              <span>Flagship: SoFo Quantum – strategic AI "mirror" for your systems.</span>
+            </span>
+            <span>
+              🎯
+              <span>Built for owners who want compounding efficiency.</span>
+            </span>
+          </div>
+        </div>
+
+        <aside class="hero-panel">
+          <div class="panel-inner">
+            <div class="panel-tag">
+              <span>●</span>
+              Live Systems Snapshot
+            </div>
+            <div class="panel-mainline">
+              Your operations, <span>reflected back</span> with clarity.
+            </div>
+            <div class="panel-subline">
+              SoFo Quantum ingests your workflows, tools, and targets —
+              then outputs a clean, prioritized roadmap for automation & AI.
+            </div>
+            <div class="panel-metrics">
+              <div class="metric">
+                <div class="metric-label">Time Unlocked</div>
+                <div class="metric-value">10–40 hrs/mo</div>
+              </div>
+              <div class="metric">
+                <div class="metric-label">Ops Overhead</div>
+                <div class="metric-value">↓ 20–35%</div>
+              </div>
+              <div class="metric">
+                <div class="metric-label">Signal vs Noise</div>
+                <div class="metric-value">x5 clarity</div>
+              </div>
+            </div>
+
+            <div class="panel-footer">
+              <div>
+                Run the first <strong>Quantum Mirror</strong> pass during onboarding, then iterate quarterly.
+              </div>
+              <div class="status-pill">
+                <span class="status-dot"></span>
+                Limited early access
+              </div>
+            </div>
+          </div>
+        </aside>
+      </section>
+
+      <!-- SERVICES -->
+      <section id="services">
+        <div class="section-kicker">What we build</div>
+        <h2 class="section-title">AI, automations, and systems that don’t break under real use.</h2>
+        <p class="section-lead">
+          We act as your embedded systems architect. One partner to design, orchestrate, and deploy
+          the stack that quietly runs your business in the background.
+        </p>
+
+        <div id="services-grid">
+          <article class="service-card">
+            <h3 class="service-title">AI + Automation Systems</h3>
+            <p class="service-body">
+              Map your processes, then wire them into robust, low-maintenance automations.
+              From lead intake to fulfillment and follow-up.
+            </p>
+          </article>
+
+          <article class="service-card">
+            <h3 class="service-title">Digital Transformation & Workflow Design</h3>
+            <p class="service-body">
+              Clean up the chaos. We streamline tools, permissions, and workflows
+              so your team knows exactly how work flows from idea → result.
+            </p>
+          </article>
+
+          <article class="service-card">
+            <h3 class="service-title">Digital Products, Templates & Blueprints</h3>
+            <p class="service-body">
+              Reusable playbooks, SOP kits, and dashboard blueprints tailored to your use case —
+              not generic “one-size-fits-none” templates.
+            </p>
+          </article>
+
+          <article class="service-card">
+            <h3 class="service-title">Custom App & Dashboard Builds (Base44)</h3>
+            <p class="service-body">
+              We use Base44 and modern tooling to create internal apps & dashboards that give you
+              real-time insight into revenue, pipeline, and operations.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <!-- PACKAGES -->
+      <section id="packages">
+        <div class="section-kicker">Packages</div>
+        <h2 class="section-title">Clear tiers. No mystery pricing.</h2>
+        <p class="section-lead">
+          Pick the tier that matches your ambition. Every engagement begins with the
+          <strong>SoFo Quantum Mirror</strong> to understand your systems before we automate anything.
+        </p>
+
+        <div id="packages-grid">
+          <!-- Tier 1 -->
+          <article class="pkg-card">
+            <div class="pkg-tier-label">Tier 1 • Core Automation</div>
+            <h3 class="pkg-name">Core Automation Stack</h3>
+            <div class="pkg-price">$2,500</div>
+            <div class="pkg-subprice">+ $250/mo maintenance</div>
+            <p class="pkg-desc">
+              Foundation systems for owners who want consistency, not complexity.
+            </p>
+            <ul class="pkg-features">
+              <li>SoFo Quantum baseline assessment (one pass)</li>
+              <li>1–2 mission-critical workflows automated end-to-end</li>
+              <li>Lite performance dashboard (Base44)</li>
+              <li>3 tailored templates/blueprints for your team</li>
+              <li>Email support + monthly check-in</li>
+            </ul>
+            <a href="#qualify" class="pkg-cta">
+              Apply for Core Automation
+              <span>↗</span>
+            </a>
+          </article>
+
+          <!-- Tier 2 -->
+          <article class="pkg-card featured">
+            <div class="pkg-tag">Most popular</div>
+            <div class="pkg-tier-label">Tier 2 • Quantum Transformation</div>
+            <h3 class="pkg-name">Quantum Transformation System</h3>
+            <div class="pkg-price">$5,000</div>
+            <div class="pkg-subprice">+ $500/mo optimization</div>
+            <p class="pkg-desc">
+              For teams ready to operate with a serious systems backbone.
+            </p>
+            <ul class="pkg-features">
+              <li>Deep-dive SoFo Quantum Mirror (multi-system)</li>
+              <li>3–5 workflows automated across your stack</li>
+              <li>Custom Base44 dashboard with KPIs & forecasting</li>
+              <li>AI assistant(s) for ops & client communication</li>
+              <li>5+ digital assets (SOPs, blueprints, templates)</li>
+              <li>Monthly optimization session + continuous tuning</li>
+            </ul>
+            <a href="#qualify" class="pkg-cta">
+              Apply for Quantum System
+              <span>↗</span>
+            </a>
+          </article>
+
+          <!-- Tier 3 -->
+          <article class="pkg-card">
+            <div class="pkg-tier-label">Tier 3 • Executive AI Ops</div>
+            <h3 class="pkg-name">Executive AI Ops Partnership</h3>
+            <div class="pkg-price">Starting at $12,500</div>
+            <div class="pkg-subprice">+ $1,500/mo retainer</div>
+            <p class="pkg-desc">
+              White-glove AI & automation for multi-location or high-revenue operators.
+            </p>
+            <ul class="pkg-features">
+              <li>Full-scope SoFo Quantum Mirror across the org</li>
+              <li>Custom internal app or portal (Base44)</li>
+              <li>Multi-agent AI stack (ops, sales, support)</li>
+              <li>Revenue, ops, and capacity dashboards</li>
+              <li>Prioritized quarterly roadmap + execution</li>
+              <li>Priority access & private communication channel</li>
+            </ul>
+            <a href="#qualify" class="pkg-cta">
+              Apply for Executive AI Ops
+              <span>↗</span>
+            </a>
+          </article>
+        </div>
+      </section>
+
+      <!-- SOFO QUANTUM -->
+      <section id="quantum">
+        <div class="section-kicker">Flagship</div>
+        <h2 class="section-title">SoFo Quantum – your business, in the mirror.</h2>
+        <p class="section-lead">
+          Quantum Mirror is a structured, AI-powered review of your systems. We map how work
+          actually flows, then reflect back the fastest, safest way to upgrade it.
+        </p>
+
+        <div class="quantum-shell">
+          <div>
+            <div class="quantum-tagline">
+              Think of it as a <strong>live, interactive diagnostic</strong> for your operations.
+            </div>
+            <ul class="quantum-list">
+              <li>We capture how leads, money, and tasks move through your business.</li>
+              <li>We run your inputs through SoFo’s AI engine + custom prompts.</li>
+              <li>You get a prioritized roadmap: <strong>what to automate, what to fix, what to kill.</strong></li>
+            </ul>
+
+            <p class="quantum-mini">
+              MVP today: Quantum Mirror runs as a structured intake + AI-generated report.
+              As we work together, this evolves into a self-serve “digital mirror” you can use
+              on demand.
+            </p>
+
+            <div class="hero-actions" style="margin-top: 12px;">
+              <a href="#qualify" class="btn-primary">
+                Run your first Quantum Mirror
+                <span>→</span>
+              </a>
+            </div>
+          </div>
+
+          <div class="quantum-panel">
+            <h4>What happens after you apply?</h4>
+            <ol>
+              <li>You complete the Quantum Mirror intake (5–10 minutes).</li>
+              <li>We run your answers through our AI stack + prompts.</li>
+              <li>We generate a focused, 1–2 page SoFo report:
+                <em>systems map, bottlenecks, and recommended automations.</em>
+              </li>
+              <li>We hop on a call, walk through the plan, and pick the right tier.</li>
+            </ol>
+            <p>
+              No fluff. You leave with a clear picture of your ops — even if we don’t work together.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- QUALIFICATION FORM -->
+      <section id="qualify">
+        <div class="section-kicker">Start here</div>
+        <h2 class="section-title">Apply for a SoFo package.</h2>
+        <p class="section-lead">
+          Short form. No spam. We only work with a limited number of operators at a time.
+        </p>
+
+        <!-- IMPORTANT:
+             Replace the action URL with your Formspree / backend endpoint.
+             Example for Formspree after setup:
+             action="https://formspree.io/f/yourFormId"
+        -->
+        <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+          <div class="form-grid">
+            <div class="form-field">
+              <label for="name">Your name *</label>
+              <input id="name" name="name" type="text" required />
+            </div>
+
+            <div class="form-field">
+              <label for="email">Email *</label>
+              <input id="email" name="email" type="email" required />
+            </div>
+
+            <div class="form-field">
+              <label for="company">Company name</label>
+              <input id="company" name="company" type="text" />
+            </div>
+
+            <div class="form-field">
+              <label for="website">Website / main link</label>
+              <input id="website" name="website" type="url" placeholder="https://..." />
+            </div>
+
+            <div class="form-field">
+              <label for="role">Your role</label>
+              <input id="role" name="role" type="text" placeholder="Owner, operator, etc." />
+            </div>
+
+            <div class="form-field">
+              <label for="revenue">Monthly revenue range</label>
+              <select id="revenue" name="revenue">
+                <option value="">Select one</option>
+                <option value="<10k">Under $10k/month</option>
+                <option value="10-30k">$10k–$30k/month</option>
+                <option value="30-100k">$30k–$100k/month</option>
+                <option value="100k+">$100k+/month</option>
+              </select>
+            </div>
+
+            <div class="form-field" style="grid-column: 1 / -1;">
+              <label for="bottleneck">What’s the main bottleneck you’re trying to solve? *</label>
+              <textarea id="bottleneck" name="bottleneck" required></textarea>
+              <div class="help-text">
+                Example: “We lose leads between channels” or “Too many manual follow-ups” or “No
+                visibility into what’s actually happening.”
+              </div>
+            </div>
+
+            <div class="form-field" style="grid-column: 1 / -1;">
+              <label>What are you most interested in? (check all that apply)</label>
+              <div class="checkbox-group">
+                <label><input type="checkbox" name="interest" value="ai_automation" />AI + automations</label>
+                <label><input type="checkbox" name="interest" value="digital_transformation" />Digital transformation</label>
+                <label><input type="checkbox" name="interest" value="dashboards" />Dashboards & forecasting</label>
+                <label><input type="checkbox" name="interest" value="custom_app" />Custom internal app</label>
+                <label><input type="checkbox" name="interest" value="digital_products" />Digital products / templates</label>
+                <label><input type="checkbox" name="interest" value="quantum_mirror_only" />Quantum Mirror report only (for now)</label>
+              </div>
+            </div>
+
+            <div class="form-field">
+              <label>Timeline</label>
+              <div class="radio-group">
+                <label><input type="radio" name="timeline" value="asap" />ASAP (this month)</label>
+                <label><input type="radio" name="timeline" value="30-60" />30–60 days</label>
+                <label><input type="radio" name="timeline" value="exploring" />Just exploring</label>
+              </div>
+            </div>
+
+            <div class="form-field">
+              <label>Are you open to being an early Quantum Mirror case study?</label>
+              <div class="radio-group">
+                <label><input type="radio" name="case_study" value="yes" />Yes</label>
+                <label><input type="radio" name="case_study" value="no" />No</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-footer">
+            <button type="submit" class="btn-primary">
+              Submit application
+              <span>↗</span>
+            </button>
+            <span>
+              We’ll review your intake and follow up with next steps & call options.
+            </span>
+          </div>
+        </form>
+      </section>
+    </main>
+
+    <footer>
+      <span>© <span id="year"></span> SoFo. All rights reserved.</span>
+      <span>
+        Built by SoFo •
+        <a href="YOUR_RESUME_SITE_URL" target="_blank" rel="noopener">View Daniel’s portfolio</a>
+      </span>
+    </footer>
+  </div>
+
+  <script>
+    // year
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // simple scroll reveal for sections
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.style.opacity = 1;
+            entry.target.style.transform = "translateY(0)";
+          }
+        });
+      },
+      { threshold: 0.12 }
+    );
+
+    document.querySelectorAll("section").forEach((sec) => {
+      sec.style.opacity = 0;
+      sec.style.transform = "translateY(18px)";
+      sec.style.transition = "opacity 0.5s ease-out, transform 0.5s ease-out";
+      observer.observe(sec);
+    });
+  </script>
+</body>
+</html>
