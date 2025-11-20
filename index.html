@@ -1181,7 +1181,16 @@
       observer.observe(sec);
     });
   </script>
+  <script>
+document.getElementById("sofoForm").addEventListener("submit", function() {
+  setTimeout(function () {
+    window.location.href = "https://sofosolutions.tech/thanks.html";
+  }, 200);  // slight delay ensures Formspree receives the submission
+});
+</script>
+
 </body>
 </html>
+
 
 
